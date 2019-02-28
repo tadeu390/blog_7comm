@@ -16,7 +16,7 @@ class CreateTablePosts extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->boolean('active');
+            $table->boolean('active')->default('1');
             $table->string('title');
             $table->text('description');
             $table->string('img_path');
