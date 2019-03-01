@@ -2,6 +2,7 @@
 
 namespace Blog\Http\Controllers;
 
+use Blog\Comment;
 use Blog\PostTag;
 use Blog\Tag;
 use Blog\Post;
@@ -11,10 +12,6 @@ use Auth;
 
 class PostController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /*!
      *  RESPONSÁVEL POR SOLICITAR O CARREGAMENTO DE TODOS OS POSTS CADASTRADOS
      * E ENVIA-LOS A VIEW.
@@ -169,5 +166,51 @@ class PostController extends Controller
             $comment->user = User::find($comment->user_id);
 
         return view("posts.details", ['post' => $post, 'tags' => $tags, 'comments' => $comments]);
+    }
+    /*!
+     *  RESPONSÁVEL POR SOLICITAR O CARREGAMENTO DE UM POST E ENVIAR OS DADOS PARA A VIEW.
+     *  ESTE MÉTODO CARREGA A VIEW PARA O USUÁRIO NÃO ADMINISTRADOR.
+     *
+     *  $id -> Id do post.
+     */
+    public function detailRegular($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->user = Post::find($id)->usuario;
+        $tags = Post::find($id)->tags;
+        $comments = Post::find($id)->comments;
+
+        foreach ($comments as $comment)
+            $comment->user = User::find($comment->user_id);
+
+        return view("posts.detailsRegular", ['post' => $post, 'tags' => $tags, 'comments' => $comments]);
+    }
+    /*!
+     *  RESPONSÁVEL POR RECEBER DO FORMULÁRIO, O COMENTÁRIO DO USUÁRIO E ENVIA-LO PARA O MODEL.
+     *
+     *  $request -> Contém o comentário do usuário.
+     */
+    public function storeComment(Request $request)
+    {
+        $resultado = $this->validarComentario($request);
+        if($resultado == "sucesso")
+        {
+            $request['user_id'] = Auth::user()->id;
+            Comment::create($request->all());
+        }
+        $arr = array('response' => $resultado);
+        header('Content-Type: application/json');
+        echo json_encode($arr);
+    }
+    /*!
+     *  RESPONSÁVEL POR VALIDAR O COMENTÁRIO INFORMADO PELO USUÁRIO.
+     *
+     *  $request -> Contém os dados a serem validados.
+     */
+    public function validarComentario($request)
+    {
+        if(empty($request->description))
+            return "Informe o seu comentário.";
+        return "sucesso";
     }
 }

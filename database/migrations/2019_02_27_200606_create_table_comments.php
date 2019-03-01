@@ -16,7 +16,7 @@ class CreateTableComments extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->boolean('active');
+            $table->boolean('active')->default('1');
             $table->text('description');
             $table->unsignedInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts');

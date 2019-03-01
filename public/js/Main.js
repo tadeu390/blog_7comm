@@ -73,7 +73,10 @@ var Main = {
                 if(msg.response == "sucesso")
                 {
                     $("#mensagem_aguardar").html("Dados salvos com sucesso");
-                    window.location.assign(Url.base_url+$("#controller").val()+"/"+ Main.method_redirect);
+                    if(Main.method_redirect == "refresh")
+                        location.reload();
+                    else
+                        window.location.assign(Url.base_url+$("#controller").val()+"/"+ Main.method_redirect);
                 }
                 else
                 {
@@ -116,6 +119,15 @@ var Main = {
             Main.show_error("title", 'Informe o título da tag', 'is-invalid');
         else if($("#url").val() == "")
             Main.show_error("url", 'Informe a url da tag', 'is-invalid');
+        else
+            Main.create_edit();
+    },
+    comentario_validar : function ()
+    {
+        Main.method_redirect = "refresh";
+        Main.method = "storeComment";
+        if($("#description").val() == "")
+            Main.show_error("description", 'Informe o seu comentário', 'is-invalid');
         else
             Main.create_edit();
     }

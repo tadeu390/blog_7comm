@@ -2,23 +2,11 @@
 
 namespace Blog\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Blog\Tag;
 use Blog\Post;
-use Blog\Comment;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -26,9 +14,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $quantidade['posts'] = Post::where('active', 1)->count();
-        $quantidade['comments'] = Comment::where('active', 1)->count();
-        $quantidade['tags'] = Tag::where('active', 1)->count();
-        return view('home', ['quantidade' => $quantidade]);
+        $posts = Post::where('active',1)->get();
+        foreach($posts as $post)
+            $post->user = Post::find($post->id)->usuario;
+
+        return view('home', ['posts' => $posts]);
     }
 }

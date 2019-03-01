@@ -11,18 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'AdminController@index')->name('admin');
 
 Route::get('/post', 'PostController@index')->name('index');
 Route::get('/post/create', 'PostController@create')->name('create');
 Route::get('/post/edit/{post}', 'PostController@edit')->name('edit');
 Route::get('/post/detail/{post}', 'PostController@detail')->name('detail');
+Route::get('/post/detailRegular/{post}', 'PostController@detailRegular')->name('detailRegular');
+Route::post('/post/storeComment/', 'PostController@storeComment')->name('storeComment');
 Route::get('/post/delete/{post}', 'PostController@delete')->name('delete');
 Route::post('/post/store/', 'PostController@store')->name('store');
 

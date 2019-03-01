@@ -28,9 +28,9 @@
             </div>
             @endif
             @if(!isset($post->id))
-                {!! Form::open(['url' => 'post/store', 'id' => 'form_cadastro_post', 'name' => 'form_cadastro']) !!}
+                {!! Form::open(['url' => 'post/store', 'id' => 'form_cadastro_post', 'name' => 'form_cadastro', 'enctype' => 'multipart/form-data']) !!}
             @else
-                {!! Form::model($post, ['url' => 'post/store/', 'id' => 'form_cadastro_post', 'name' => 'form_cadastro']) !!}
+                {!! Form::model($post, ['url' => 'post/store/', 'id' => 'form_cadastro_post', 'name' => 'form_cadastro', 'enctype' => 'multipart/form-data']) !!}
                 {!! Form::input('hidden','id', $post->id) !!}
             @endif
             {!! Form::input('hidden','controller', 'post', ['id' => 'controller']) !!}
@@ -43,6 +43,11 @@
                 {!! Form::label('description', 'Descrição') !!}
                 {!! Form::textarea('description', null, ['id' => 'description', 'name' => 'description', 'class' => 'form-control','rows' => '20']) !!}
                 <div class='input-group mb-2 mb-sm-0 text-danger' id='error-description'></div>
+            </div>
+            <div class="form-group">
+                <label class="file-upload btn btn-primary">
+                    Selecione uma imagem para o post <input type="file" name="image" id="image" />
+                </label>
             </div>
             {!! Form::label('tags', 'Tags') !!}
             <div class="col-lg-12 bg-white rounded p-3">

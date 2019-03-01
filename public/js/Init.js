@@ -19,6 +19,12 @@ $(document).ready(
             Main.tag_validar();
         });
 
+        $("#form_cadastro_comment").submit(function(event)
+        {
+            event.preventDefault();
+            Main.comentario_validar();
+        });
+
         $('#title').blur(function()
         {
             if (this.value != '') Main.show_error("title", '', 'is-valid');
@@ -32,6 +38,10 @@ $(document).ready(
         $('#url').blur(function()
         {
             if (this.value != '') Main.show_error("url", '', 'is-valid');
+        });
+
+        $(document).ready(function() {
+            $('.file-upload').file_upload();
         });
     }
 );

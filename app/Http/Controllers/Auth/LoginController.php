@@ -33,8 +33,8 @@ class LoginController extends Controller
     {
         $user = User::find(Auth::user()->id);
         if($user->tipo_usuario_id == 1)//admin
-            return '/home';
-        return '/regular';
+            return '/admin';
+        return '/home';
     }
     /**
      * Create a new controller instance.

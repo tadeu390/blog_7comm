@@ -14,6 +14,7 @@
     <script src="{{ asset('js/Url.js') }}" defer></script>
     <script src="{{ asset('js/Init.js') }}" defer></script>
     <script src="{{ asset('js/Main.js') }}" defer></script>
+    <script src="{{ asset('js/file-upload.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -42,7 +43,7 @@
                     @else
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{ url('/home') }}">
+                                <a class="nav-link" href="{{ url('/admin') }}">
                                     Home
                                 </a>
                             </li>
