@@ -40,6 +40,28 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" id="user_type" name="user_type">
+                                    <option value="">Selecione</option>
+                                    @foreach($tipos as $tipo)
+                                        @if($tipo->id == old('user_type'))
+                                            <option value="{{$tipo->id}}" selected>{{$tipo->description}}</option>
+                                        @else
+                                            <option value="{{$tipo->id}}">{{$tipo->description}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('user_type'))
+                                    <span class="invalid-feedback" role="alert" style="display: block;">
+                                        <strong>{{ $errors->first('user_type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

@@ -19,7 +19,7 @@ class CreateTablePosts extends Migration
             $table->boolean('active')->default('1');
             $table->string('title');
             $table->text('description');
-            $table->string('img_path');
+            $table->string('img_path')->nullable(true);
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });

@@ -3,6 +3,8 @@
 namespace Blog\Http\Controllers\Auth;
 
 use Blog\Http\Controllers\Controller;
+use Blog\User;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -27,6 +29,13 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/home';
 
+    protected function redirectTo()
+    {
+        $user = User::find(Auth::user()->id);
+        if($user->tipo_usuario_id == 1)//admin
+            return '/home';
+        return '/regular';
+    }
     /**
      * Create a new controller instance.
      *

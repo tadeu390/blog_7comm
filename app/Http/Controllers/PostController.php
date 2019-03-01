@@ -11,6 +11,10 @@ use Auth;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /*!
      *  RESPONSÁVEL POR SOLICITAR O CARREGAMENTO DE TODOS OS POSTS CADASTRADOS
      * E ENVIA-LOS A VIEW.

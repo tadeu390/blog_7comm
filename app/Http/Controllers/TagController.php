@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /*!
      *  RESPONSÁVEL POR SOLICITAR O CARREGAMENTO DE TODAS AS TAGS CADASTRADAS
      * E ENVIA-LAS A VIEW.
