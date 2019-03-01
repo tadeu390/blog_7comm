@@ -44,11 +44,6 @@
                 {!! Form::textarea('description', null, ['id' => 'description', 'name' => 'description', 'class' => 'form-control','rows' => '20']) !!}
                 <div class='input-group mb-2 mb-sm-0 text-danger' id='error-description'></div>
             </div>
-            <div class="form-group">
-                <label class="file-upload btn btn-primary">
-                    Selecione uma imagem para o post <input type="file" name="image" id="image" />
-                </label>
-            </div>
             {!! Form::label('tags', 'Tags') !!}
             <div class="col-lg-12 bg-white rounded p-3">
                 <?php $i = 0;?>
