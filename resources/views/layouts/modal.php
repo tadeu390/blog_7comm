@@ -56,7 +56,7 @@
 <div id="modal_large" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header" style="background: rgb(241,193,0); padding-bottom: 0px;">
+            <div class="modal-header" style="background: rgb(241,193,0); padding-bottom: 0px;">modal_aguardar
                 <h5 class="modal-title text-white w-100" id="header_large"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

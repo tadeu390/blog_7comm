@@ -17,7 +17,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::get();
+        $tags = Tag::where('active', 1)->get();
         return view("tags.index", ['tags' => $tags]);
     }
     /*!
@@ -39,27 +39,56 @@ class TagController extends Controller
         return view("tags.create_edit", ['tag' => $tag]);
     }
     /*!
+     *  RESPONSÁVEL POR VALIDAR OS CAMPOS DO FORMULÁRIO.
+     *
+     *  $request -> Contém os campos a serem validados.
+     */
+    public function validar($request)
+    {
+        $tagTitle = Tag::where('title', $request->title)->first();
+        $tagUrl = Tag::where('url', $request->url)->first();
+
+        if(empty($request->title))
+            return "Informe o título da tag";
+        else if(!empty($tagTitle) && $request->id != $tagTitle->id)
+            return "Já existe uma tag cadastrada com este título";
+        else if(empty($request->url))
+            return "Informe a url da tag";
+        else if(!empty($tagUrl) && $request->id != $tagUrl->id)
+            return "Já existe uma tag cadastrada com esta Url";
+        return "sucesso";
+    }
+    /*!
      *  RESPONSÁVEL POR COLETAR OS DADOS ENVIADOS PELO FORMULÁRIO.
      *
      * $request -> Contém os campos enviados pelo formulário.
      */
     public function store(Request $request)
     {
-        $validacao = $request->validate([
+        $resultado = $this->validar($request);
+
+        /*$validacao = $request->validate([
             'title' => 'required',
             'url' => 'required',
-        ]);
+        ]);*/
 
-        if(!isset($request->id))
-            Tag::create($request->all());
-        else
+        if($resultado == "sucesso")
         {
-            $tag = Tag::findOrFail($request->id);
-            $tag->update($request->all());
+            if (!isset($request->id))
+                Tag::create($request->all());
+            else {
+                $tag = Tag::findOrFail($request->id);
+                $tag->update($request->all());
+            }
         }
-        return \Redirect::to('tag');
+        $arr = array('response' => $resultado);
+        header('Content-Type: application/json');
+        echo json_encode($arr);
     }
-
+    /*!
+     *  RESPONSÁVEL POR SOLICITAR A "EXCLUSÃO" DE UM REGISTRO.
+     *  $id -> Id do registro a ser "apagado".
+     */
     public function delete($id)
     {
         $tag = Tag::findOrFail($id);
@@ -70,5 +99,17 @@ class TagController extends Controller
         $arr = array('response' => $resultado);
         header('Content-Type: application/json');
         echo json_encode($arr);
+    }
+    /*!
+     *  RESPONSÁVEL POR SOLICITAR O CARREGAMENTO DE UMA TAG E DOS POSTS
+     *  RELACIONADOS A ELA E ENVIAR OS DADOS PARA A VIEW.
+     *
+     *  $id -> Id da tag.
+     */
+    public function detail($id)
+    {
+        $tag = Tag::findOrFail($id);
+        $posts = Tag::find($id)->posts;
+        return view("tags.details", ['tag' => $tag, 'posts' => $posts]);
     }
 }

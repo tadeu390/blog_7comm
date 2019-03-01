@@ -12,4 +12,8 @@ class Tag extends Model
         'active'
         ];
 
+    public function posts()
+    {
+        return $this->belongsToMany('Blog\Post','post_tags');
+    }
 }

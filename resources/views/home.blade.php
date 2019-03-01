@@ -9,21 +9,21 @@
                     <div class="card-header text-center">Quantidade de posts cadastrados</div>
                     <div class="card-body">
                         <h5 class="card-title"></h5>
-                        <p class="card-text text-center h1">50</p>
+                        <p class="card-text text-center h1">{{$quantidade['posts']}}</p>
                     </div>
                 </div>
                 <div class="card d-inline-bloc text-white bg-dark mb-3  ml-5" style="max-width: 18rem;">
                     <div class="card-header text-center">Quantidade de comentários realizados</div>
                     <div class="card-body">
                         <h5 class="card-title"></h5>
-                        <p class="card-text text-center h1">500</p>
+                        <p class="card-text text-center h1">{{$quantidade['comments']}}</p>
                     </div>
                 </div>
                 <div class="card d-inline-bloc text-white bg-dark mb-3  ml-5" style="max-width: 18rem;">
                     <div class="card-header text-center">Quantidade de tags cadastradas</div>
                     <div class="card-body">
                         <h5 class="card-title"></h5>
-                        <p class="card-text text-center h1">106</p>
+                        <p class="card-text text-center h1">{{$quantidade['tags']}}</p>
                     </div>
                 </div>
             </div>

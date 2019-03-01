@@ -6,5 +6,32 @@ $(document).ready(
         {
             Main.delete_registro();
         });
+
+        $("#form_cadastro_post").submit(function(event)
+        {
+            event.preventDefault();
+            Main.post_validar();
+        });
+
+        $("#form_cadastro_tag").submit(function(event)
+        {
+            event.preventDefault();
+            Main.tag_validar();
+        });
+
+        $('#title').blur(function()
+        {
+            if (this.value != '') Main.show_error("title", '', 'is-valid');
+        });
+
+        $('#description').blur(function()
+        {
+            if (this.value != '') Main.show_error("description", '', 'is-valid');
+        });
+
+        $('#url').blur(function()
+        {
+            if (this.value != '') Main.show_error("url", '', 'is-valid');
+        });
     }
 );

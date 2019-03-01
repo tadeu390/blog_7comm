@@ -18,29 +18,21 @@
                     </a>
                 </div>
                 <br />
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 @if(!isset($tag->id))
-                    {!! Form::open(['url' => 'tag/store']) !!}
+                    {!! Form::open(['url' => 'tag/store', 'id' => 'form_cadastro_tag', 'name' => 'form_cadastro']) !!}
                 @else
-                    {!! Form::model($tag, ['url' => 'tag/store/']) !!}
+                    {!! Form::model($tag, ['url' => 'tag/store', 'id' => 'form_cadastro_tag', 'name' => 'form_cadastro']) !!}
                     {!! Form::input('hidden','id', $tag->id) !!}
                 @endif
+                    {!! Form::input('hidden','controller', 'tag', ['id' => 'controller']) !!}
                     <div class="form-group">
                         {!! Form::label('title', 'Título') !!}
-                        {!! Form::input('text', 'title', null, ['class' =>'form-control', 'autofocus', 'required']) !!}
+                        {!! Form::input('text', 'title', null, ['class' =>'form-control', 'autofocus']) !!}
                         <div class='input-group mb-2 mb-sm-0 text-danger' id='error-title'></div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('url', 'Url') !!}
-                        {!! Form::input('text', 'url', null, ['class' =>'form-control', 'autofocus', 'required']) !!}
+                        {!! Form::input('text', 'url', null, ['class' =>'form-control', 'autofocus']) !!}
                         <div class='input-group mb-2 mb-sm-0 text-danger' id='error-url'></div>
                     </div>
                     {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
@@ -48,4 +40,5 @@
             </div>
         </div>
     </div>
+    @include("layouts.modal")
 @endsection

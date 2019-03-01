@@ -17,7 +17,7 @@
                         <thead>
                         <tr>
                             <td colspan="3" class="text-right">
-                                <a class="btn btn-success" href="{{ url('/tag/create') }}">
+                                <a class="btn btn-primary" href="{{ url('/tag/create') }}">
                                     Nova tag
                                 </a>
                             </td>
@@ -35,8 +35,8 @@
                                     <td>{{$tag->url}}</td>
                                     <td class="text-right">
                                         <a href="tag/edit/{{$tag->id}}" title="Editar" class="btn btn-sm text-danger"><i class="fas fa-edit"></i></a>
+                                        <a href="tag/detail/{{$tag->id}}" title="Visualizar" class="btn btn-sm text-danger"><i class="fas fa-info"></i></a>
                                         <button onclick="Main.confirm_delete({{$tag->id}})" title="Excluir" class="btn btn-sm text-danger" style="background-color: transparent;"><i class="fas fa-trash-alt"></i></button>
-                                        <a href="tag/edit/{{$tag->id}}" title="Visualizar" class="btn btn-sm text-danger"><i class="fas fa-info"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
